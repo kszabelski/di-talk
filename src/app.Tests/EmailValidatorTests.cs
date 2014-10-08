@@ -5,17 +5,11 @@ namespace Procent.DependencyInjection.Tests
 {
     public class EmailValidatorTests
     {
-        readonly EmailValidator _validator;
         string _email;
-
-        public EmailValidatorTests()
-        {
-            _validator = new EmailValidator();
-        }
-
+        
         bool execute()
         {
-            return _validator.Validate(_email);
+            return EmailValidator.Validate(_email);
         }
 
         [Fact]

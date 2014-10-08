@@ -4,14 +4,12 @@ namespace Procent.DependencyInjection.app
 {
     public class UsersController
     {
-        private readonly IEmailValidator _emailValidator;
         private readonly IActivationLinkGenerator _activationLinkGenerator;
         private readonly IEmailService _emailService;
         private readonly IUsersDatabase _usersDatabase;
 
-        public UsersController(IEmailValidator emailValidator, IActivationLinkGenerator activationLinkGenerator, IEmailService emailService, IUsersDatabase usersDatabase)
+        public UsersController(IActivationLinkGenerator activationLinkGenerator, IEmailService emailService, IUsersDatabase usersDatabase)
         {
-            _emailValidator = emailValidator;
             _activationLinkGenerator = activationLinkGenerator;
             _emailService = emailService;
             _usersDatabase = usersDatabase;
@@ -20,7 +18,7 @@ namespace Procent.DependencyInjection.app
         public void RegisterUser(string email)
         {
             // check if email is valid
-            if (_emailValidator.Validate(email) == false)
+            if (EmailValidator.Validate(email) == false)
             {
                 throw new ArgumentException("Invalid email address");
             }
